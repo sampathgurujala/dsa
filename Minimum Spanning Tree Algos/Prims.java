@@ -109,5 +109,17 @@ Data Structures Used:
 	•	Priority Queue (Min-Heap) for edge selection
 	•	Set for tracking visited nodes
 	•	List to store MST edges
-
+ Time Complexity: O(E log V)
+    Explanation:
+    •   Each edge is pushed and popped from the PriorityQueue at most once
+	•	offer() or poll() in a PriorityQueue takes O(log E) time
+	•	So, for all E edges:
+	        Total Time = O(E log E)
+	 But since E can be at most V², and usually we express complexity in terms of V, the standard form is: O(E log V)
+ Space Complexity: O(E + V)
+     Explanation:
+        •	Adjacency List: O(V + E)
+        •	Visited Set: O(V)
+        •	PriorityQueue: O(E) (in worst case, all edges go into the queue)
+        •	MST Result: O(V)
  */

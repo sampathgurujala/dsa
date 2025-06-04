@@ -57,7 +57,7 @@ public class Dijkstra
 		int[] dist = dijkstra(edges,2,n);
 		for(int i=1;i<=n;i++)
 		{
-			System.out.println("Vetex : "+i+" | Shortest Distance :" + dist[i]);
+			System.out.println("Vertex : "+i+" | Shortest Distance :" + dist[i]);
 		}
  	}
 }
