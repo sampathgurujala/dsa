@@ -3,19 +3,19 @@ import java.util.*;
 public class TopologicalSort
 {   //Leetcode Course Scheduler 2 Problem
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-        int[] outDegree= new int[numCourses];
+        int[] inDegree= new int[numCourses];
         Map<Integer,List<Integer>> dependants=new HashMap<>();
         for(int[] prereq: prerequisites)
         {
             List<Integer> list =dependants.getOrDefault(prereq[1], new ArrayList<Integer>());
             list.add(prereq[0]);
             dependants.put(prereq[1],list);
-            outDegree[prereq[0]]++;
+            inDegree[prereq[0]]++;
         }
         Queue<Integer> q=new LinkedList();
         for(int i=0;i<numCourses;i++)
         {
-            if(outDegree[i]==0)
+            if(inDegree[i]==0)
                 q.offer(i);
         }
         int canDo = 0;
@@ -29,8 +29,8 @@ public class TopologicalSort
                 List<Integer> dep = dependants.get(curr);
                 for(int course : dep)
                 {
-                    outDegree[course]--;
-                    if(outDegree[course]==0)
+                    inDegree[course]--;
+                    if(inDegree[course]==0)
                         q.offer(course);
                 }
             }
@@ -52,11 +52,11 @@ public class TopologicalSort
                 {3, 1},
                 {3, 2}
 //                         0
-//                         ^
 //                        / \
+//                       v   v
 //                       1   2
-//                       ^   ^
 //                        \ /
+//                         v
 //                         3
         };
 
