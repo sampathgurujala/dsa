@@ -1,3 +1,4 @@
+import java.util.*;
 class TreeNode
 {
     int val;
@@ -78,6 +79,27 @@ public class BinarySearchTree {
         System.out.print(root.val+"->");
         inorderTraversal(root.right);
     }
+    public void levelOrderTraversal(TreeNode root)
+    {
+        if(root==null)
+            return;
+        Queue<TreeNode> q= new LinkedList();
+        q.offer(root);
+        while(!q.isEmpty())
+        {
+            int size = q.size();
+            for(int i=0;i<size;i++) {
+                TreeNode node = q.poll();
+                System.out.print(node.val + "->");
+                if (node.left != null)
+                    q.offer(node.left);
+                if (node.right != null)
+                    q.offer(node.right);
+            }
+            System.out.println();
+        }
+        return;
+    }
     public void preorderTraversal(TreeNode root)
     {
         if(root==null)
@@ -106,17 +128,21 @@ public static void main(String[] args)
      root=bst.insert(root,40);
 
      bst.inorderTraversal(root);
-
-
-     root= bst.delete(root,30);
      System.out.println();
+     bst.preorderTraversal(root);
+     System.out.println();
+     bst.postorderTraversal(root);
+     System.out.println();
+     bst.levelOrderTraversal(root);
 
+     System.out.println("-------------------------------------");
      TreeNode node = bst.searchBST(root,40);
      if(node!=null)
          System.out.println(node.val);
     else
         System.out.println("No value Found");
-
+     root= bst.delete(root,30);
+     System.out.println("-------------After Deletion------------------------");
     bst.inorderTraversal(root);
 
  }
