@@ -116,6 +116,26 @@ public class BinarySearchTree {
         postorderTraversal(root.right);
         System.out.print(root.val+"->");
     }
+    public int floor(TreeNode root,int x)
+    {
+        if(root==null)
+            return -1;
+        if(root.val == x)
+            return root.val;
+        if(root.val>x)  //it should be in left subtree
+            return floor(root.left,x);
+        int flr = floor(root.right,x);      //check if floor can be found in in right sub tree, if so return it, else return current root val
+        return (flr!=-1 && flr<=x)?flr:root.val;
+    }
+    public int ceil(TreeNode root, int x)
+    {
+        if(root==null)
+            return -1;
+        if(root.val<x)
+            return ceil(root.right,x);  //it should be in right subtree
+        int ceilVal = ceil(root.left,x);        // check if ceil(x) of left sub tree is found, if then return it, else return current root val
+        return (ceilVal!=-1 && ceilVal>=x)?ceilVal:root.val;
+    }
 public static void main(String[] args)
  {
      BinarySearchTree bst = new BinarySearchTree();
@@ -145,5 +165,8 @@ public static void main(String[] args)
      System.out.println("-------------After Deletion------------------------");
     bst.inorderTraversal(root);
 
+     System.out.println();
+     System.out.println(bst.floor(root,41));
+     System.out.println(bst.ceil(root,39));
  }
 }
